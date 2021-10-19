@@ -1,9 +1,13 @@
 import logging
+from typing import List
+
+import mutagen
 
 from playlist_converter.utils import progress_bar_handler
 from playlist_converter.spotify import SpotifyService
 from playlist_converter.youtube import YouTubeService
 from playlist_converter.config import Config
+from playlist_converter.model import Track
 
 
 class PlaylistConverter:
@@ -14,21 +18,45 @@ class PlaylistConverter:
         self._progress_bar_handler = progress_bar_handler
 
     def convert_spotify_playlist(self) -> None:
-        spotify_playlist = self._spotify_service.get_playlist_from_spotify()
+        playlist = self._spotify_service.get_playlist_from_spotify()
+        tracks_with_video = self._get_youtube_video_for_tracks_in_playlist(playlist.tracks)
+        playlist.tracks = tracks_with_video
+        self._download_youtube_video_for_tracks_in_playlist(playlist.tracks)
+        self._logger.info('Done!')
 
+    def _get_youtube_video_for_tracks_in_playlist(self, tracklist: List[Track]) -> List[Track]:
         self._progress_bar_handler.create(
-            total=len(spotify_playlist.tracks),
+            total=len(tracklist),
             description='Fetching YouTube URLs []',
             unit=' tracks')
-        for index, track in enumerate(spotify_playlist.tracks, start=0):
-            result = self._youtube_service.search_youtube(
+        for track in tracklist:
+            result = self._youtube_service.find_youtube_video(
                 search_query=track.get_name_and_artists_as_string())
 
             if result is not None:
                 track.youtube_video = result
             else:
-                self._progress_bar_handler.print_message('Could not find video for [' + track.get_name_and_artists_as_string() + ']')
+                self._progress_bar_handler.print_message(
+                    'Could not find video for [' + track.get_name_and_artists_as_string() + ']')
+
             self._progress_bar_handler.update(
                 increment=1,
                 description='Fetching YouTube URLs [' + track.name)
+
+        self._progress_bar_handler.close()
+
+        return tracklist
+
+    def _download_youtube_video_for_tracks_in_playlist(self, tracks: List[Track]):
+        self._progress_bar_handler.create(
+            total=len(tracks),
+            description='Downloading YouTube videos [',
+            unit=' tracks')
+
+        for track in tracks:
+            self._youtube_service.download_youtube_video_for_track(track)
+            self._progress_bar_handler.update(
+                increment=1,
+                description='Downloading YouTube videos [' + track.name)
+
         self._progress_bar_handler.close()

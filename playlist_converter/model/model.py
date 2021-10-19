@@ -1,3 +1,4 @@
+import re
 from typing import List
 
 
@@ -27,18 +28,16 @@ class Track:
 
     def get_all_artist_names_as_string(self) -> str:
         number_of_artists_for_track = len(self.artists)
-        number_of_loops = 0
         names = ''
 
-        for artist in self.artists:
+        for index, artist in enumerate(self.artists):
             if number_of_artists_for_track == 1:
                 names = artist.name
             elif number_of_artists_for_track > 1:
-                if number_of_loops == 0:
+                if index == 0:
                     names = artist.name
-                elif number_of_loops > 0 & number_of_loops <= number_of_artists_for_track:
+                elif index > 0 & index <= number_of_artists_for_track:
                     names += ' & ' + artist.name
-            number_of_loops += 1
 
         return names
 
@@ -49,3 +48,10 @@ class Playlist:
         self.name = name
         self.description = description
         self.tracks = tracks
+
+    def get_all_track_urls(self) -> List[str]:
+        urls = []
+        for track in self.tracks:
+            urls.append(track.youtube_video.url)
+
+        return urls

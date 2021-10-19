@@ -2,7 +2,6 @@ import os
 
 from dotenv import load_dotenv
 
-
 class Config:
 
     def __init__(self):
@@ -15,11 +14,16 @@ class Config:
             os.environ.get('SPOTIFY_CLIENT_ID'),
             os.environ.get('SPOTIFY_CLIENT_SECRET'))
 
-        # Get required YouTube variables
-        self.youtube = YouTubeConfig(
-            os.environ.get('YOUTUBE_DEVELOPER_KEY'),
-            os.environ.get('YOUTUBE_API_SERVICE_NAME'),
-            os.environ.get('YOUTUBE_API_VERSION'))
+        self.youtube = YoutubeDLConfig({
+            'format': 'm4a',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio'
+            }],
+            'quiet': True,
+            'no_warnings': True,
+            'no-progress': True,
+            'progress': False,
+        })
 
 
 class SpotifyConfig:
@@ -30,9 +34,7 @@ class SpotifyConfig:
         self.client_secret = clst
 
 
-class YouTubeConfig:
+class YoutubeDLConfig:
 
-    def __init__(self, dvky: str, api_name: str, api_version):
-        self.developer_key = dvky
-        self.api_service_name = api_name
-        self.api_version = api_version
+    def __init__(self, options: dict):
+        self.options = options

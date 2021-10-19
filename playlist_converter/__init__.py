@@ -17,10 +17,10 @@ __all__ = ['utils',
 
 def setup_logger():
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
-    formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(name)s: %(message)s')
+    console_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('[%(levelname)s]: %(message)s')
 
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
@@ -32,9 +32,6 @@ def main() -> None:
         _real_main()
     except KeyError:
         sys.exit('Please set the all the required environment variables, and rerun the program')
-    except PlaylistConverterException as exception:
-        pprint(exception.message)
-        sys.exit(exception.traceback)
     except KeyboardInterrupt:
         sys.exit('\nERROR: Interrupted by user')
     except Exception:

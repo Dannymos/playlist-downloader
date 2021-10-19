@@ -1,6 +1,6 @@
-from .config import Config, SpotifyConfig, YouTubeConfig
+from .config import Config, SpotifyConfig, YoutubeDLConfig
 
-__all__ = ['configuration', 'Config', 'SpotifyConfig', 'YouTubeConfig']
+__all__ = ['configuration', 'Config', 'SpotifyConfig', 'YoutubeDLConfig']
 
 global configuration
 

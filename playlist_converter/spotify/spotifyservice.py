@@ -1,11 +1,12 @@
 import logging
-from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 from typing import List
 
 from playlist_converter.utils import progress_bar_handler
 from playlist_converter.config import SpotifyConfig
 from playlist_converter.model import Playlist, Track, Artist
+
 
 class SpotifyService:
 
@@ -41,7 +42,8 @@ class SpotifyService:
 
         self._progress_bar_handler.update(increment=1)
         self._progress_bar_handler.close()
-        self._progress_bar_handler.print_message('Playlist found: [' + playlist['name'] + '] with [' + str(len(tracks)) + '] tracks')
+        self._progress_bar_handler.print_message(
+            'Playlist found: [' + playlist['name'] + '] with [' + str(len(tracks)) + '] tracks')
 
         return Playlist(playlist['name'], playlist['description'], tracks)
 
