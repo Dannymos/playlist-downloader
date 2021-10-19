@@ -5,7 +5,7 @@ from typing import List
 class Artist:
 
     def __init__(self, name: str):
-        self.name = name
+        self.name = re.sub('[\\\\/:*?\"<>|]', '', name)
 
 
 class YouTubeVideo:
@@ -19,7 +19,7 @@ class YouTubeVideo:
 class Track:
 
     def __init__(self, name: str, artists: List[Artist], youtube_video: YouTubeVideo = None):
-        self.name = name
+        self.name = re.sub('[\\\\/:*?\"<>|]', '', name)
         self.artists = artists
         self.youtube_video = youtube_video
 
