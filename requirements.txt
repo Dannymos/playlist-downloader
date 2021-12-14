@@ -1,5 +1,7 @@
-setuptools~=58.2.0
-python-dotenv~=0.19.1
-spotipy~=2.19.0
-mutagen~=1.45.1
-tqdm~=4.62.3
+mutagen==1.45.1
+python-dotenv==0.19.2
+setuptools==58.2.0
+spotipy==2.19.0
+tqdm==4.62.3
+youtube_search_python==1.4.9
+yt_dlp==2021.10.10

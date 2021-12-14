@@ -42,8 +42,6 @@ class SpotifyService:
 
         self._progress_bar_handler.update(increment=1)
         self._progress_bar_handler.close()
-        self._progress_bar_handler.print_message(
-            'Playlist found: [' + playlist['name'] + '] with [' + str(len(tracks)) + '] tracks')
 
         return Playlist(playlist['name'], playlist['description'], tracks)
 

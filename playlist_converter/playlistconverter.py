@@ -1,8 +1,6 @@
 import logging
 from typing import List
 
-import mutagen
-
 from playlist_converter.utils import progress_bar_handler
 from playlist_converter.spotify import SpotifyService
 from playlist_converter.youtube import YouTubeService
@@ -19,10 +17,12 @@ class PlaylistConverter:
 
     def convert_spotify_playlist(self) -> None:
         playlist = self._spotify_service.get_playlist_from_spotify()
+        self._logger.info(
+            'Playlist found: [' + playlist.name + '] with [' + str(len(playlist.tracks)) + '] tracks')
         tracks_with_video = self._get_youtube_video_for_tracks_in_playlist(playlist.tracks)
         playlist.tracks = tracks_with_video
         self._download_youtube_video_for_tracks_in_playlist(playlist.tracks)
-        self._logger.info('Done!')
+        self._logger.info('Done, exiting...')
 
     def _get_youtube_video_for_tracks_in_playlist(self, tracklist: List[Track]) -> List[Track]:
         self._progress_bar_handler.create(
@@ -44,6 +44,7 @@ class PlaylistConverter:
                 description='Fetching YouTube URLs [' + track.name)
 
         self._progress_bar_handler.close()
+        self._logger.info('Done fetching YouTube urls!')
 
         return tracklist
 
@@ -60,3 +61,4 @@ class PlaylistConverter:
                 description='Downloading YouTube videos [' + track.name)
 
         self._progress_bar_handler.close()
+        self._logger.info('Done downloading YouTube videos!')
