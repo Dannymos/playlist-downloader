@@ -1,3 +1,5 @@
+import sys
+
 import playlist_converter
 
 if __name__ == '__main__':

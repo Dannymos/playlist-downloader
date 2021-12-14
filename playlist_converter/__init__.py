@@ -1,3 +1,4 @@
+import getopt, sys
 import logging
 import sys
 import traceback
@@ -26,12 +27,25 @@ def setup_logger():
     logger.addHandler(console_handler)
 
 
+def parse_arguments():
+    opts, args = getopt.getopt(sys.argv[1:], "p:", ["playlist-id="])
+    for o, a in opts:
+        if o == 'p' or o == '--playlist-id':
+            configuration.spotify.playlist_id = a
+
+
+
+
 def main() -> None:
     try:
         setup_logger()
+        parse_arguments()
         _real_main()
     except KeyError:
         sys.exit('Please set the all the required environment variables, and rerun the program')
+    except getopt.GetoptError as err:
+        sys.exit('No valid playlist id provided, please provide a valid playlist as an argument ( -p or '
+                 '--playlist-id)')
     except KeyboardInterrupt:
         sys.exit('\nERROR: Interrupted by user')
     except Exception:

@@ -10,7 +10,6 @@ class Config:
 
         # Get required Spotify variables
         self.spotify = SpotifyConfig(
-            os.environ.get('SPOTIFY_PLAYLIST_ID'),
             os.environ.get('SPOTIFY_CLIENT_ID'),
             os.environ.get('SPOTIFY_CLIENT_SECRET'))
 
@@ -28,8 +27,8 @@ class Config:
 
 class SpotifyConfig:
 
-    def __init__(self, plid: str, clid: str, clst: str):
-        self.playlist_id = plid
+    def __init__(self, clid: str, clst: str):
+        self.playlist_id = ''
         self.client_id = clid
         self.client_secret = clst
 
