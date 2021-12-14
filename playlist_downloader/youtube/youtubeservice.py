@@ -3,8 +3,8 @@ import mutagen
 import yt_dlp
 from youtubesearchpython import VideosSearch
 
-from playlist_converter.model.model import YouTubeVideo, Track
-from playlist_converter.config.config import YoutubeDLConfig
+from playlist_downloader.model.model import YouTubeVideo, Track
+from playlist_downloader.config.config import YoutubeDLConfig
 
 
 class YouTubeService:

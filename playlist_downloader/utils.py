@@ -2,15 +2,15 @@ import logging
 from tqdm import tqdm
 
 
-class PlaylistConverterException(Exception):
+class PlaylistDownloaderException(Exception):
 
     def __init__(self, msg: str, tb=None):
-        super(PlaylistConverterException, self).__init__(msg)
+        super(PlaylistDownloaderException, self).__init__(msg)
         self.message = 'ERROR: ' + msg
         self.traceback = tb
 
 
-class MissingEnvironmentVariableException(PlaylistConverterException):
+class MissingEnvironmentVariableException(PlaylistDownloaderException):
 
     def __init__(self):
         super(MissingEnvironmentVariableException, self).__init__()

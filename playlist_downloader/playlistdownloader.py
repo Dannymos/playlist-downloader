@@ -1,14 +1,14 @@
 import logging
 from typing import List
 
-from playlist_converter.utils import progress_bar_handler
-from playlist_converter.spotify import SpotifyService
-from playlist_converter.youtube import YouTubeService
-from playlist_converter.config import Config
-from playlist_converter.model import Track
+from playlist_downloader.utils import progress_bar_handler
+from playlist_downloader.spotify import SpotifyService
+from playlist_downloader.youtube import YouTubeService
+from playlist_downloader.config import Config
+from playlist_downloader.model import Track
 
 
-class PlaylistConverter:
+class PlaylistDownloader:
     def __init__(self, configuration: Config):
         self._logger = logging.getLogger(__name__)
         self._spotify_service = SpotifyService(configuration.spotify)

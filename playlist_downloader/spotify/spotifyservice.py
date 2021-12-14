@@ -3,9 +3,9 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from typing import List
 
-from playlist_converter.utils import progress_bar_handler
-from playlist_converter.config import SpotifyConfig
-from playlist_converter.model import Playlist, Track, Artist
+from playlist_downloader.utils import progress_bar_handler
+from playlist_downloader.config import SpotifyConfig
+from playlist_downloader.model import Playlist, Track, Artist
 
 
 class SpotifyService:

@@ -252,8 +252,8 @@ cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,dotenv,pycharm
 
-/playlist_converter/____pycache__
-/playlist_converter/pyvenv.cfg
+/playlist_downloader/____pycache__
+/playlist_downloader/pyvenv.cfg
 ./dist
 .env
 .cache

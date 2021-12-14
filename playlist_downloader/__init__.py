@@ -4,14 +4,14 @@ import sys
 import traceback
 from pprint import pprint
 
-from .utils import PlaylistConverterException, MissingEnvironmentVariableException, ProgressBarHandler
-from .playlistconverter import PlaylistConverter
+from .utils import PlaylistDownloaderException, MissingEnvironmentVariableException, ProgressBarHandler
+from .playlistdownloader import PlaylistDownloader
 from .config import configuration
 
 __all__ = ['utils',
            'model',
-           'PlaylistConverter',
-           'PlaylistConverterException',
+           'PlaylistDownloader',
+           'PlaylistDownloaderException',
            'MissingEnvironmentVariableException',
            'ProgressBarHandler']
 
@@ -53,5 +53,5 @@ def main() -> None:
 
 
 def _real_main() -> None:
-    playlist_converter = PlaylistConverter(configuration)
+    playlist_converter = PlaylistDownloader(configuration)
     playlist_converter.convert_spotify_playlist()
