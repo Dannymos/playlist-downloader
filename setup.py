@@ -4,7 +4,7 @@ start_command = 'playlist-converter'
 
 setup(
     name='playlist-converter',
-    version='0.0.1',
+    version='1.0.1',
     packages=['playlist_converter'],
     install_requires=[
         'importlib; python_version == "3.9"',
