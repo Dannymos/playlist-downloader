@@ -20,7 +20,7 @@ class YouTubeService:
         return youtube_video
 
     def download_youtube_video_for_track(self, track: Track) -> None:
-        self.youtube_dl_options['outtmpl'] = '/downloads/' + track.get_name_and_artists_as_string() + '.%(ext)s'
+        self.youtube_dl_options['outtmpl'] = './downloads/' + track.get_name_and_artists_as_string() + '.%(ext)s'
         try:
             with yt_dlp.YoutubeDL(self.youtube_dl_options) as ydl:
                 ydl.download([track.youtube_video.url])
