@@ -1,7 +1,7 @@
 # Playlist downloader
 This script allows you to download spotify playlists by searching YouTube for video's matching the tracks in the playlist, and downloading them.
 
-####Setup
+#### Setup
 
 Create a .env file and add the following variables as per the example.env:
 
@@ -18,7 +18,7 @@ Run setup.py to register the starting command:
 
 ``python setup.py install``
 
-####Running the application
+#### Running the application
 
 To run the application execute the following command:
 
