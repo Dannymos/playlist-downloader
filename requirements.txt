@@ -4,4 +4,4 @@ setuptools==58.2.0
 spotipy==2.19.0
 tqdm==4.62.3
 youtube_search_python==1.4.9
-yt_dlp==2023.03.04
+yt_dlp==2023.10.13
